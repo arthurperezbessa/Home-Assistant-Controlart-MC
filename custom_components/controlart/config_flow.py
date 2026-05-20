@@ -67,8 +67,11 @@ async def _probe_module(host: str, port: int) -> dict[str, Any]:
     protocol = ControlArtProtocol(host, port)
     await protocol.async_start()
     try:
+        # Firmware antigo responde "macaddr,...", firmware novo "macaddr_RT,...".
         mac_line = await protocol.async_query(
-            "get_mac_addr", lambda line: line.startswith("macaddr_RT"), timeout=5
+            "get_mac_addr",
+            lambda line: line.startswith("macaddr"),
+            timeout=5,
         )
         # macaddr_RT,33-79-F4
         hex_part = mac_line.split(",", 1)[1].strip()
