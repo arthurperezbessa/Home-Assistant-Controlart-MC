@@ -1,0 +1,48 @@
+calibrate:
+  name: Calibrar cortina
+  description: >-
+    Executa um passo da calibração de uma cortina/persiana ControlArt.
+    Use as ações de subida e descida para registrar os limites do motor.
+  target:
+    entity:
+      integration: controlart
+      domain: cover
+  fields:
+    action:
+      name: Ação
+      description: Passo de calibração a executar.
+      required: true
+      selector:
+        select:
+          options:
+            - label: Iniciar calibração de subida
+              value: start_up
+            - label: Parar calibração de subida
+              value: stop_up
+            - label: Iniciar calibração de descida
+              value: start_down
+            - label: Parar calibração de descida
+              value: stop_down
+            - label: Resetar calibração
+              value: reset
+
+set_motor_mode:
+  name: Definir modo do motor
+  description: >-
+    Altera o modo de operação do motor de uma cortina/persiana ControlArt.
+  target:
+    entity:
+      integration: controlart
+      domain: cover
+  fields:
+    mode:
+      name: Modo
+      description: Modo de operação do motor.
+      required: true
+      selector:
+        select:
+          options:
+            - label: Normal (com feedback de posição)
+              value: normal
+            - label: Sem feedback
+              value: no_feedback
